@@ -62,22 +62,22 @@ namespace MergeSortThreading
 
             for (int i = 0; i < threads; i++) //Пока не закончились потоки
             {
-                arrs[i] = new int[arr.Length / threads]; //Создание массива с размерностью (длина начального массива/кол-во потоков)
+                arrs[i] = new int[arr.Length / threads]; //Создание массива с размерностью 
 
-                Array.Copy(arr, i * (arr.Length / threads), arrs[i], 0, arr.Length / threads); //(исходный массив, длина/кол-во потоков, массив, новый массив, )
+                Array.Copy(arr, i * (arr.Length / threads), arrs[i], 0, arr.Length / threads); 
 
                 sorting[i] = new Thread(new ParameterizedThreadStart(sort)); //Инициализация потока для сортировки
 
-                sorting[i].Start(arrs[i]); //Запуск потока для сортировки
+                sorting[i].Start(arrs[i]); //Запуск потока 
             }
 
             for (int i = 0; i < threads; i++) //Пока не закончились потоки
 
-                sorting[i].Join(); // блокируем предыдующие до завершения
+                sorting[i].Join(); // блокируем предыдующие 
 
-            bool norm = false; //Флаг для 1 прохода
+            bool norm = false; 
 
-            while (arrs.Length != 1) //Пока длина массива не равна 1
+            while (arrs.Length != 1) 
             {
                 int k = 0;
                 int[][] tmp = new int[arrs.Length / 2][];
@@ -113,7 +113,7 @@ namespace MergeSortThreading
                 {
                     merging[j] = new Thread(new ParameterizedThreadStart(sort)); //Инициализация парралельного потока для сортировки
 
-                    merging[j].Start(tmp[j]); //Запуск парралельного потока для сортировки
+                    merging[j].Start(tmp[j]); //Запуск парралельного потока 
                 }
 
                 for (int i = 0; i < tmp.Length; i++) //Блокирование потока до завершения
